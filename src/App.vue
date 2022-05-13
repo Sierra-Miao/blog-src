@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div class="mdui-toolbar background-pink mdui-appbar-fixed mdui-shadow-0" style="z-index:1;">
+		<div class="mdui-toolbar background-pink mdui-appbar-fixed mdui-shadow-0" style="z-index:100;">
 			<router-link to="" class="mdui-btn mdui-btn-icon">
 				<i mdui-drawer="{target: '#main-drawer'}" class="mdui-icon material-icons">menu</i>
 			</router-link>

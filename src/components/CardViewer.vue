@@ -1,8 +1,8 @@
 <template>
-<div class="big-container">
-	<div class="container">
-		<div :style="cardStyle" v-for="item in cardDataPagination[pageCount]" :key="item.href">
-			<div class="mdui-card card">
+	<div class="big-container">
+		<div class="container">
+			<div :style="cardStyle" class="mdui-card card" v-for="item in cardDataPagination[pageCount]"
+				:key="item.href">
 				<div class="mdui-card-media">
 					<img class="card_img" :src="item.img">
 				</div>
@@ -16,20 +16,20 @@
 				</div>
 			</div>
 		</div>
-	</div>
-	<div class="pagination-container">
-		<span class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-pink-accent" @click="prev"
-			style="margin:4px;">上一页</span>
-		<div v-for="i in totalPageCount" :key="i" class="pagination">
-			<a @click="() => pageCount = i - 1"
-				class="mdui-btn mdui-btn-icon mdui-btn-dense mdui-color-pink-accent mdui-ripple" style="margin:3px;">{{
-						i
-				}}</a>
+		<div class="pagination-container">
+			<span class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-pink-accent" @click="prev"
+				style="margin:4px;">上一页</span>
+			<div v-for="i in totalPageCount" :key="i" class="pagination">
+				<a @click="() => pageCount = i - 1"
+					class="mdui-btn mdui-btn-icon mdui-btn-dense mdui-color-pink-accent mdui-ripple"
+					style="margin:3px;">{{
+							i
+					}}</a>
+			</div>
+			<span class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-pink-accent" @click="next"
+				style="margin:4px;">下一页</span>
 		</div>
-		<span class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-pink-accent" @click="next"
-			style="margin:4px;">下一页</span>
 	</div>
-</div>
 </template>
 
 <script lang="ts">
@@ -56,11 +56,11 @@ export default class CardViewer extends Vue {
 		window.onresize = () => this.reSize();
 	}
 
-	reSize(): void{
-		if(1.7 * window.innerWidth > window.innerHeight){
-			this.cardStyle = "min-width: 33%"
+	reSize(): void {
+		if (1.7 * window.innerWidth > window.innerHeight) {
+			this.cardStyle = "width: 31%"
 		}
-		else{
+		else {
 			this.cardStyle = "min-width: 95%"
 		}
 	}
@@ -81,7 +81,7 @@ export default class CardViewer extends Vue {
 		if (this.pageCount === this.totalPageCount - 1) {
 			return;
 		}
-		else{
+		else {
 			this.pageCount++;
 		}
 	}
@@ -89,7 +89,7 @@ export default class CardViewer extends Vue {
 		if (this.pageCount === 0) {
 			return;
 		}
-		else{
+		else {
 			this.pageCount--;
 		}
 	}
@@ -97,55 +97,59 @@ export default class CardViewer extends Vue {
 	navagate(href: string): void {
 		setTimeout(() =>
 			this.$router.push(href)
-		,250)
+			, 250)
 	}
 }
 </script>
 
 <style>
 .big-container {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-  position: absolute;
-  z-index: -1;
-  top: 50px;
-  min-width: 70vw;
-  margin: 20px auto;
-  padding-left: 5vw;
-  padding-right: 0;
-  padding-bottom: 30px;
-  justify-content: center;
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+	position: absolute;
+	z-index: -1;
+	top: 50px;
+	min-width: 59%;
+	margin: 20px auto;
+	padding-left: 10%;
+	padding-right: 10%;
+	padding-bottom: 30px;
+	justify-content: center;
+	align-items: center;
 }
 
 .container {
-  display: flex;
-  z-index: -100000;
-  flex-wrap: wrap;
-  align-items: center;
-  font-family: 'Quicksand', sans-serif;
+	display: flex;
+	z-index: -2;
+	flex-wrap: wrap;
+	align-items: center;
+	font-family: 'Quicksand', sans-serif;
+	width:100%;
+	margin:0;
 }
 
 .card_img {
-  height: auto;
+	height: auto;
 }
 
-.pagination-container{
-	padding-top:10vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+.pagination-container {
+	padding-top: 2vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
 }
-.pagination{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
+
+.pagination {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
 }
 
 .card {
-    margin: 10px;
+	margin:5px;
 }
 </style>
