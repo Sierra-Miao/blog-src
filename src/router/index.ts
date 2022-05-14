@@ -11,6 +11,11 @@ const routes: Array<RouteRecordRaw> = [
     }
   },
   {
+    path: '/Search',
+    name: 'search',
+    component: () => import('../components/CardSearch.vue')
+  },
+  {
     path: '/:any',
     redirect:() => {
       return{

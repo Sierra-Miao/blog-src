@@ -6,7 +6,7 @@
 			</router-link>
 			<span class="mdui-typo-title">{{ title }}</span>
 			<div class="mdui-toolbar-spacer" style="z-index:1;"></div>
-			<router-link to="" class="mdui-textfield-icon mdui-btn mdui-btn-icon">
+			<router-link to="/Search" class="mdui-textfield-icon mdui-btn mdui-btn-icon">
 				<i class="mdui-icon material-icons">search</i>
 			</router-link>
 		</div>
@@ -30,10 +30,11 @@
 						<i class="mdui-collapse-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
 					</div>
 					<div class="mdui-collapse-item-body mdui-list">
-						<router-link to="" class="mdui-list-item mdui-ripple">小日常</router-link>
-						<router-link to="" class="mdui-list-item mdui-ripple">奇奇怪怪的图</router-link>
-						<router-link to="" class="mdui-list-item mdui-ripple">番外篇</router-link>
-						<router-link to="" class="mdui-list-item mdui-ripple">滑滑乱翻书</router-link>
+						<router-link to="/Dogfood/小日常" class="mdui-list-item mdui-ripple">小日常</router-link>
+						<router-link to="/Dogfood/奇奇怪怪的图" class="mdui-list-item mdui-ripple">奇奇怪怪的图</router-link>
+						<router-link to="/Dogfood/世界第一的童话" class="mdui-list-item mdui-ripple">世界第一的童话</router-link>
+            <router-link to="/Dogfood/快雪时晴" class="mdui-list-item mdui-ripple">快雪时晴</router-link>
+						<router-link to="/Dogfood/滑滑乱翻书" class="mdui-list-item mdui-ripple">滑滑乱翻书</router-link>
 					</div>
 				</div>
 			</div>

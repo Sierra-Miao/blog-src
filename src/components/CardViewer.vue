@@ -66,10 +66,11 @@ export default class CardViewer extends Vue {
 	}
 
 	cardDataFilter(): void {
+		console.log(this.Data.data.sort())
 		this.totalPageCount = 0;
 		this.flagToView = typeof this.$route.params.flag === 'string' ? this.$route.params.flag : 'all';
 		this.cardDataPagination.splice(0, this.cardDataPagination.length);
-		this.cardData = this.flagToView === 'all' ? this.Data.data.sort() : this.Data.data.filter((elem) => elem.flag === this.flagToView).sort();
+		this.cardData = this.flagToView === 'all' ? this.Data.data.filter(() => true).sort((a,b) => b.valueOf() - a.valueOf()) : this.Data.data.filter((elem) => elem.flag === this.flagToView).sort((a,b) => b.valueOf() - a.valueOf());
 		for (let i = 0; i < this.cardData.length; i += this.elemPerPage) {
 			this.cardDataPagination.push(this.cardData.slice(i, i + this.elemPerPage));
 			this.totalPageCount++;
