@@ -8,21 +8,21 @@ import { cardInfo } from '@/main'
 
 export default class constData{
     public data:Array<cardInfo> = new Array<cardInfo>(
-        new cardInfo("/C Like/1",
+        new cardInfo("/Blog/C Like/1",
             new Date(2022,1,1),
             "C++",
             "Hello World",
             "C Like",
             "./img/blog/logo.png"
         ),
-        new cardInfo("/C Like/1",
+        new cardInfo("/Blog/C Like/1",
             new Date(2022,1,1),
             "C++",
             "Hello World",
             "C Like",
             "./img/blog/logo.png"
         ),
-        new cardInfo("/C Like/1",
+        new cardInfo("/Blog/C Like/1",
             new Date(2022,1,1),
             "C++",
             "Hello World",

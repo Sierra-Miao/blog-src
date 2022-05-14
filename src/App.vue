@@ -19,9 +19,9 @@
 					</div>
 					<div class="mdui-collapse-item-body mdui-list">
 						<router-link to="/" class="mdui-list-item mdui-ripple">All</router-link>
-						<router-link to="/C Like" class="mdui-list-item mdui-ripple">C Like</router-link>
-						<router-link to="/前端" class="mdui-list-item mdui-ripple">前端</router-link>
-						<router-link to="/后端" class="mdui-list-item mdui-ripple">后端</router-link>
+						<router-link to="/Blog/C Like" class="mdui-list-item mdui-ripple">C Like</router-link>
+						<router-link to="/Blog/前端" class="mdui-list-item mdui-ripple">前端</router-link>
+						<router-link to="/Blog/后端" class="mdui-list-item mdui-ripple">后端</router-link>
 					</div>
 				</div>
 				<div class="mdui-collapse-item">
@@ -48,11 +48,11 @@ export default class toolBar extends Vue {
 	public title = "";
 	async created(): Promise<void> {
 		await this.$router.isReady();
-		this.title = typeof this.$route.params.flag === "string" ? this.$route.params.flag :  "Blog";
+		this.title = typeof this.$route.params.flag === "string" ? (this.$route.params.flag === "all" ? "Blog" : this.$route.params.flag) :  "Blog";
 		this.$watch(
 			() => this.$route,
 			() => {
-				this.title = typeof this.$route.params.flag === "string" ? this.$route.params.flag :  "Blog";
+				this.title = typeof this.$route.params.flag === "string" ? (this.$route.params.flag === "all" ? "Blog" : this.$route.params.flag) :  "Blog";
 			}
 		)
 	}

@@ -36,7 +36,7 @@ export default class pageView extends Vue {
     }
 
     fetchContent(): void {
-        axios.get(`./docs/${this.$route.params.flag}/${this.$route.params.id}.md`)
+        axios.get(`./docs/${this.$route.params.area}/${this.$route.params.flag}/${this.$route.params.id}.md`)
             .then((res) => {
                 this.content = res.data;
             })

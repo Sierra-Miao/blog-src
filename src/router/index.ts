@@ -3,22 +3,60 @@ import Card from '../components/CardViewer.vue'
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    name: 'blog',
-    component: Card
+    redirect:() => {
+      return{
+        name:'Card',
+        params:{ area: 'Blog', flag: 'all' }
+      }
+    }
   },
   {
-    path: '/:flag',
-    component: Card
+    path: '/:any',
+    redirect:() => {
+      return{
+        name:'Card',
+        params:{ area: 'Blog', flag: 'all' }
+      }
+    }
   },
   {
-    path: '/:flag/:id',
+    path: '/:area/:flag',
+    component: Card,
+    name: 'Card'
+  },
+  {
+    path: '/:area/:flag/:id',
+    name: 'Viewer',
     component: () => import('../components/PageViewer.vue')
   },
 ]
+
 
 const router = createRouter({
   history: createWebHashHistory(),
   routes
 })
+
+
+const map = new Map<string,Array<string>>([
+  ["Blog",["all","C Like","前端","后端"]],
+  ["Dogfood",["小日常","奇奇怪怪的图","世界第一的童话","快雪时晴","滑滑乱翻书"]],
+])
+
+router.beforeEach((to) => {
+  if(to.name!.toString() === 'Card' || to.name!.toString() === 'Viewer'){
+    const key = typeof to.params.area === 'string' ? to.params.area : 'undefined';
+    if(map.has(key)){
+      const val = typeof to.params.flag === 'string' ? to.params.flag : 'undefined';
+      if(map.get(key)!.find(elem => elem === val) === undefined){
+        return false;
+      }
+    }
+    else{
+      return false;
+    }
+  }
+});
+
 
 export default router

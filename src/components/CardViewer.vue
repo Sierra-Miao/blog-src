@@ -57,7 +57,7 @@ export default class CardViewer extends Vue {
 	}
 
 	reSize(): void {
-		if (1.7 * window.innerWidth > window.innerHeight) {
+		if (1.6 * window.innerWidth > window.innerHeight) {
 			this.cardStyle = "width: 31%"
 		}
 		else {
