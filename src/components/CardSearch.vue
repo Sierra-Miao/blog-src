@@ -34,7 +34,7 @@ import { Vue } from 'vue-class-component';
 import { cardInfo } from '@/main';
 import constData from '@/data'
 export default class CardViewer extends Vue {
-	private Data = new constData().data.filter((elem) => elem.area === "Blog").sort();
+	private Data = new constData().data.filter((elem) => elem.area === "Blog").sort((a,b) => b.valueOf() - a.valueOf());
 	public searchResult: Array<cardInfo> = new Array<cardInfo>();
 	public cardStyle = "min-width: 33%";
 	public searchWords = "";

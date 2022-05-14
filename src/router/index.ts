@@ -1,5 +1,6 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw, RouterLink, RouterView, routerViewLocationKey } from 'vue-router'
 import Card from '../components/CardViewer.vue'
+import Viewer from '../components/PageViewer.vue'
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
@@ -32,7 +33,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/:area/:flag/:id',
     name: 'Viewer',
-    component: () => import('../components/PageViewer.vue')
+    component: Viewer
   },
 ]
 
