@@ -1,13 +1,25 @@
 <template>
-    <v-md-preview :text="content"></v-md-preview>
+    <!-- <v-md-preview :text="content"></v-md-preview> -->
+    <div>
+        <md-editor style="padding:0 1.5rem;" v-model="content" :highlight="hljs" theme="light" preview-theme="vuepress" previewOnly />
+    </div>
 </template>
 
 <script lang="ts">
 import axios from 'axios'
-import { Vue } from 'vue-class-component';
+import { Vue, Options } from 'vue-class-component';
+import hljs from 'highlight.js';
+import MdEditor from 'md-editor-v3';
+import 'md-editor-v3/lib/style.css';
+@Options({
+  components: {
+    MdEditor,
+  },
+})
 export default class pageView extends Vue {
     public content = "";
-    
+    public hljs = hljs;
+
     async created(): Promise<void> {
         await this.$router.isReady();
         this.fetchContent();
