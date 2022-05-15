@@ -50,6 +50,9 @@ const map = new Map<string,Array<string>>([
 ])
 
 router.beforeEach((to) => {
+  if (to.params.flag) {
+    document.title = (typeof to.params.flag === 'string' ? (to.params.flag === 'all' ? 'Blog' : to.params.flag) : 'Blog') + '~Sierra-Miao~';
+  }
   if(to.name!.toString() === 'Card' || to.name!.toString() === 'Viewer'){
     const key = typeof to.params.area === 'string' ? to.params.area : 'undefined';
     if(map.has(key)){

@@ -9,8 +9,11 @@
 				<div @click="navagate(item.href)" class="mdui-card-primary mdui-ripple card_title"
 					style="background-color: rgba(253, 188, 199,0.5);">
 					<div class="mdui-card-primary-title">{{ item.title }}</div>
-					<div class="mdui-card-primary-subtitle">{{
-							`${item.date.getFullYear()}.${item.date.getMonth()}.${item.date.getDate()}`
+					<div v-if="isNotHuabook" class="mdui-card-primary-subtitle">{{
+							`${item.date.getFullYear()}.${item.date.getMonth() + 1}.${item.date.getDate()}`
+					}}</div>
+					<div v-else class="mdui-card-primary-subtitle">{{
+							item.star
 					}}</div>
 					<div class="mdui-card-content">{{ item.content }}</div>
 				</div>
@@ -45,6 +48,7 @@ export default class CardViewer extends Vue {
 	public totalPageCount = 0;
 	public pageCount = 0;
 	public cardStyle = "min-width: 33%";
+	public isNotHuabook = true;
 	async created(): Promise<void> {
 		await this.$router.isReady();
 		this.cardDataFilter();
@@ -66,16 +70,21 @@ export default class CardViewer extends Vue {
 	}
 
 	cardDataFilter(): void {
-		console.log(this.Data.data.sort())
 		this.totalPageCount = 0;
 		this.flagToView = typeof this.$route.params.flag === 'string' ? this.$route.params.flag : 'all';
 		this.cardDataPagination.splice(0, this.cardDataPagination.length);
-		this.cardData = this.flagToView === 'all' ? this.Data.data.filter(() => true).sort((a,b) => b.valueOf() - a.valueOf()) : this.Data.data.filter((elem) => elem.flag === this.flagToView).sort((a,b) => b.valueOf() - a.valueOf());
+		this.cardData = this.flagToView === 'all' ? this.Data.data.filter((elem) => elem.area === "Blog").sort((a,b) => b.valueOf() - a.valueOf()) : this.Data.data.filter((elem) => elem.flag === this.flagToView).sort((a,b) => b.valueOf() - a.valueOf());
 		for (let i = 0; i < this.cardData.length; i += this.elemPerPage) {
 			this.cardDataPagination.push(this.cardData.slice(i, i + this.elemPerPage));
 			this.totalPageCount++;
 		}
 		this.pageCount = 0;
+		if(this.cardData.some(elem => elem.flag === "滑滑乱翻书")){
+			this.isNotHuabook = false;
+		}
+		else{
+			this.isNotHuabook = true;
+		}
 	}
 
 	next(): void {
@@ -103,7 +112,7 @@ export default class CardViewer extends Vue {
 }
 </script>
 
-<style>
+<style scoped>
 .big-container {
 	display: flex;
 	flex-wrap: wrap;
@@ -137,6 +146,7 @@ export default class CardViewer extends Vue {
 .pagination-container {
 	padding-top: 2vh;
 	display: flex;
+	flex-wrap: wrap;
 	align-items: center;
 	justify-content: center;
 	text-align: center;

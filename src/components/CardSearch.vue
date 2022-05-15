@@ -20,7 +20,7 @@
 					style="background-color: rgba(253, 188, 199,0.5);">
 					<div class="mdui-card-primary-title">{{ item.title }}</div>
 					<div class="mdui-card-primary-subtitle">{{
-							`${item.date.getFullYear()}.${item.date.getMonth()}.${item.date.getDate()}`
+							`${item.date.getFullYear()}.${item.date.getMonth() + 1}.${item.date.getDate()}`
 					}}</div>
 					<div class="mdui-card-content">{{ item.content }}</div>
 				</div>
@@ -60,7 +60,7 @@ export default class CardViewer extends Vue {
 	}
 
 	cardDataSearch(elem: cardInfo, toSearch: string): boolean {
-		return (elem.title.indexOf(toSearch) !== -1 || elem.content.indexOf(toSearch) !== -1 || `${elem.date.getFullYear()}.${elem.date.getMonth()}.${elem.date.getDate()}`.indexOf(toSearch) !== -1)
+		return (elem.title.indexOf(toSearch) !== -1 || elem.content.indexOf(toSearch) !== -1 || `${elem.date.getFullYear()}.${elem.date.getMonth() + 1}.${elem.date.getDate()}`.indexOf(toSearch) !== -1)
 	}
 
 	reSize(): void {
@@ -81,7 +81,7 @@ export default class CardViewer extends Vue {
 }
 </script>
 
-<style>
+<style scoped>
 .big-container {
 	display: flex;
 	flex-wrap: wrap;

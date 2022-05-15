@@ -2,6 +2,10 @@
     <!-- <v-md-preview :text="content"></v-md-preview> -->
     <div>
         <md-editor style="padding:0 1.5rem;" v-model="content" :highlight="hljs" theme="light" preview-theme="vuepress" previewOnly />
+        <div style="margin: 1.5em auto; display: flex; justify-content: center;">
+            <a @click="prev" style="margin:0.5rem" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-pink-accent">上一章</a>
+            <a @click="next" style="margin:0.5rem" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-pink-accent">下一章</a>
+        </div>
     </div>
 </template>
 
@@ -46,6 +50,14 @@ export default class pageView extends Vue {
                     this.$router.go(-1);
                 }
             })
+    }
+
+    prev(): void{
+        this.$router.push(`/${this.$route.params.area}/${this.$route.params.flag}/${Number(this.$route.params.id) - 1}`)
+    }
+
+    next(): void{
+        this.$router.push(`/${this.$route.params.area}/${this.$route.params.flag}/${Number(this.$route.params.id) + 1}`)
     }
 }
 </script>

@@ -12,8 +12,9 @@ export class cardInfo {
     public area:string;
     public flag: string;
     public img: string;
-    
-    constructor(href: string, date: Date, title: string, content: string, area: string, flag: string, img = "./img/default.png") {
+    public star?: string;
+
+    constructor(href: string, date: Date, title: string, content: string, area: string, flag: string, img = "./img/default.png", star?: string) {
         this.content = content;
         this.date = date;
         this.href = href;
@@ -21,6 +22,7 @@ export class cardInfo {
         this.img = img;
         this.flag = flag;
         this.area = area;
+        this.star = star;
     }
     valueOf(): number {
         if(this.flag === "世界第一的童话" || this.flag === "快雪时晴"){
