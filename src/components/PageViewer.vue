@@ -1,10 +1,13 @@
 <template>
     <!-- <v-md-preview :text="content"></v-md-preview> -->
     <div>
-        <md-editor style="padding:0 1.5rem;" v-model="content" :highlight="hljs" theme="light" preview-theme="vuepress" previewOnly />
+        <md-editor style="padding:0 1.5rem;" v-model="content" :highlight="hljs" theme="light" preview-theme="vuepress" :marked-heading="markedHeading" :marked-heading-id="markedHeadingId"
+            previewOnly />
         <div style="margin: 1.5em auto; display: flex; justify-content: center;">
-            <a @click="prev" style="margin:0.5rem" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-pink-accent">上一章</a>
-            <a @click="next" style="margin:0.5rem" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-pink-accent">下一章</a>
+            <a @click="prev" style="margin:0.5rem"
+                class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-pink-accent">上一章</a>
+            <a @click="next" style="margin:0.5rem"
+                class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-pink-accent">下一章</a>
         </div>
     </div>
 </template>
@@ -16,9 +19,9 @@ import hljs from 'highlight.js';
 import MdEditor from 'md-editor-v3';
 import 'md-editor-v3/lib/style.css';
 @Options({
-  components: {
-    MdEditor,
-  },
+    components: {
+        MdEditor,
+    },
 })
 export default class pageView extends Vue {
     public content = "";
@@ -52,12 +55,20 @@ export default class pageView extends Vue {
             })
     }
 
-    prev(): void{
+    prev(): void {
         this.$router.push(`/${this.$route.params.area}/${this.$route.params.flag}/${Number(this.$route.params.id) - 1}`)
     }
 
-    next(): void{
+    next(): void {
         this.$router.push(`/${this.$route.params.area}/${this.$route.params.flag}/${Number(this.$route.params.id) + 1}`)
+    }
+
+    markedHeading(text: string,level: number,raw: string):string{
+        return `<h${level} id="${raw}">${text}</h${level}>`;
+    }
+
+    markedHeadingId(text: string, level: number) :string{
+        return `${this.$route.params.area}/${this.$route.params.flag}/${this.$route.params.id}`;
     }
 }
 </script>
