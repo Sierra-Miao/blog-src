@@ -1,7 +1,7 @@
 <template>
 	<div class="big-container">
-		<div class="container">
-			<div :style="cardStyle" class="mdui-card card" v-for="item in cardDataPagination[pageCount]"
+		<div :style="gridResponsiveLayout" class="container">
+			<div class="mdui-card card" v-for="item in cardDataPagination[pageCount]"
 				:key="item.href">
 				<div class="mdui-card-media">
 					<img class="card_img" :src="item.img">
@@ -49,6 +49,7 @@ export default class CardViewer extends Vue {
 	public pageCount = 0;
 	public cardStyle = "min-width: 33%";
 	public isNotHuabook = true;
+	public gridResponsiveLayout = "grid-template-columns: repeat(3, 33.3%);";
 	async created(): Promise<void> {
 		await this.$router.isReady();
 		this.cardDataFilter();
@@ -56,16 +57,21 @@ export default class CardViewer extends Vue {
 			() => this.$route.params.flag,
 			() => this.cardDataFilter()
 		)
-		this.reSize();
-		window.onresize = () => this.reSize();
+		this.ResponsiveLayout()
+		window.onresize = () => this.ResponsiveLayout();
 	}
 
-	reSize(): void {
-		if (1.6 * window.innerWidth > window.innerHeight) {
-			this.cardStyle = "width: 31%"
+	ResponsiveLayout(): void{
+		let width = window.innerWidth;
+		let height = window.innerHeight;
+		if(1.6 * width < height){
+			this.gridResponsiveLayout = "grid-template-columns: 100%"
 		}
-		else {
-			this.cardStyle = "min-width: 95%"
+		else if(width < 1.1 * height){
+			this.gridResponsiveLayout = "grid-template-columns: repeat(2, 50%);"
+		}
+		else{
+			this.gridResponsiveLayout = "grid-template-columns: repeat(3, 33.3%);"
 		}
 	}
 
@@ -113,36 +119,25 @@ export default class CardViewer extends Vue {
 </script>
 
 <style scoped>
-.big-container {
-	display: flex;
-	flex-wrap: wrap;
-	flex-direction: column;
-	position: absolute;
-	z-index: -1;
-	top: 50px;
-	min-width: 59%;
-	margin: 20px auto;
-	padding-left: 10%;
-	padding-right: 10%;
-	padding-bottom: 30px;
-	justify-content: center;
-	align-items: center;
-}
-
-.container {
-	display: flex;
-	z-index: -2;
-	flex-wrap: wrap;
-	align-items: center;
-	font-family: 'Quicksand', sans-serif;
+.big-container{
+	position:relative;
+	margin-top:1.5rem;
 	width:100%;
-	margin:0;
+	display:flex;
+	flex-direction:column;
+	align-items: center;
 }
-
-.card_img {
-	height: auto;
+.container{
+	display:grid;
+	width:calc(100% - 2rem);
+	max-width:60rem;
+	padding: 0 1rem;
+	border-style:none;
 }
-
+.card{
+	margin: 0.5rem;
+	align-self: start;
+}
 .pagination-container {
 	padding-top: 2vh;
 	display: flex;
@@ -160,7 +155,4 @@ export default class CardViewer extends Vue {
 	justify-content: center;
 }
 
-.card {
-	margin:5px;
-}
 </style>

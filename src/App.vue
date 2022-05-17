@@ -49,11 +49,11 @@ export default class toolBar extends Vue {
 	public title = "";
 	async created(): Promise<void> {
 		await this.$router.isReady();
-		this.title = typeof this.$route.params.flag === "string" ? (this.$route.params.flag === "all" ? "Blog" : this.$route.params.flag) :  "Blog";
+		this.title = typeof this.$route.params.flag === "string" ? (this.$route.params.flag === "all" ? "Blog" : this.$route.params.flag) :  this.$route.name!.toString() === 'search' ? "Search" : 'Blog';
 		this.$watch(
 			() => this.$route,
 			() => {
-				this.title = typeof this.$route.params.flag === "string" ? (this.$route.params.flag === "all" ? "Blog" : this.$route.params.flag) :  "Blog";
+				this.title = typeof this.$route.params.flag === "string" ? (this.$route.params.flag === "all" ? "Blog" : this.$route.params.flag) :  this.$route.name!.toString() === 'search' ? "Search" : 'Blog';
 			}
 		)
 	}
