@@ -9,6 +9,38 @@ import { cardInfo } from '@/main'
 
 export default class constData {
     public data: Array<cardInfo> = new Array<cardInfo>(
+        new cardInfo("",
+            new Date(2022, 5 - 1, 19),
+            "正在摸鸡鸡的起飞",
+            "可恶，手太短了，摸不到鸡鸡！",
+            "Dogfood",
+            "奇奇怪怪的图",
+            "./img/dogfood/ps/23.jpg"
+        ),
+        new cardInfo("",
+            new Date(2022, 5 - 1, 18),
+            "秦始皇张清洁",
+            "清洁扫七校，虎视何雄哉！挥剑决浮云，生源尽西来。",
+            "Dogfood",
+            "奇奇怪怪的图",
+            "./img/dogfood/ps/22.jpg"
+        ),
+        new cardInfo("",
+            new Date(2022, 5 - 1, 17),
+            "呜呜呜，好耶被滑滑压瘪了，滑滑大坏蛋",
+            "起飞：好想吃好耶肉饼啊",
+            "Dogfood",
+            "奇奇怪怪的图",
+            "./img/dogfood/ps/21.png"
+        ),
+        new cardInfo("",
+            new Date(2022, 5 - 1, 16),
+            "变装的好耶",
+            "喜欢穿衣服的好耶吗？",
+            "Dogfood",
+            "奇奇怪怪的图",
+            "./img/dogfood/ps/20.png"
+        ),
         new cardInfo("/Dogfood/快雪时晴/3",
             new Date(2022, 1 - 1, 3),
             "三、午夜龙府",
