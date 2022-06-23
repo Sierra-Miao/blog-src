@@ -1,6 +1,6 @@
 <template>
 	<div class="big-container">
-		<div :style="gridResponsiveLayout" class="container">
+		<div class="container">
 			<div class="mdui-card card" v-for="item in cardDataPagination[pageCount]"
 				:key="item.href">
 				<div class="mdui-card-media">
@@ -47,9 +47,7 @@ export default class CardViewer extends Vue {
 	public elemPerPage = 12;
 	public totalPageCount = 0;
 	public pageCount = 0;
-	public cardStyle = "min-width: 33%";
 	public isNotHuabook = true;
-	public gridResponsiveLayout = "grid-template-columns: repeat(3, 33.3%);";
 	async created(): Promise<void> {
 		await this.$router.isReady();
 		this.cardDataFilter();
@@ -57,22 +55,6 @@ export default class CardViewer extends Vue {
 			() => this.$route.params.flag,
 			() => this.cardDataFilter()
 		)
-		this.ResponsiveLayout()
-		window.onresize = () => this.ResponsiveLayout();
-	}
-
-	ResponsiveLayout(): void{
-		let width = window.innerWidth;
-		let height = window.innerHeight;
-		if(1.6 * width < height){
-			this.gridResponsiveLayout = "grid-template-columns: 100%"
-		}
-		else if(width < 1.1 * height){
-			this.gridResponsiveLayout = "grid-template-columns: repeat(2, 50%);"
-		}
-		else{
-			this.gridResponsiveLayout = "grid-template-columns: repeat(3, 33.3%);"
-		}
 	}
 
 	cardDataFilter(): void {
@@ -133,7 +115,21 @@ export default class CardViewer extends Vue {
 	max-width:60rem;
 	padding: 0 1rem;
 	border-style:none;
+	grid-template-columns: repeat(3, 33.3%);
 }
+
+@media screen and (max-width: 960px) {
+	.container{
+		grid-template-columns: repeat(2, 50%);
+	}
+}
+	
+@media screen and (max-width: 600px) {
+	.container{
+		grid-template-columns: 100%;
+	}
+}
+
 .card{
 	margin: 0.5rem;
 	align-self: start;

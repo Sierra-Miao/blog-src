@@ -1,7 +1,12 @@
 <template>
-    <!-- <v-md-preview :text="content"></v-md-preview> -->
     <div>
-        <md-editor style="padding:0 1.5rem;" v-model="content" :highlight="hljs" theme="light" preview-theme="vuepress" :marked-heading="markedHeading" :marked-heading-id="markedHeadingId"
+        <md-editor style="padding:0 1.5rem;" 
+                   v-model="content" 
+                   :highlight="hljs" 
+                   theme="light" 
+                   preview-theme="vuepress" 
+                   :marked-heading="markedHeading" 
+                   :marked-heading-id="markedHeadingId"
             previewOnly />
         <div style="margin: 1.5em auto; display: flex; justify-content: center;">
             <a @click="prev" style="margin:0.5rem"

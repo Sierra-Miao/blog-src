@@ -11,7 +11,7 @@
 				</button>
 			</div>
 		</div>
-		<div :style="gridResponsiveLayout" class="container">
+		<div class="container">
 			<div class="mdui-card card" v-for="item in searchResult" :key="item.href">
 				<div class="mdui-card-media">
 					<img :src="item.img">
@@ -37,7 +37,6 @@ export default class CardViewer extends Vue {
 	private Data = new constData().data.filter((elem) => elem.area === "Blog").sort((a,b) => b.valueOf() - a.valueOf());
 	public searchResult: Array<cardInfo> = new Array<cardInfo>();
 	public searchWords = "";
-	public gridResponsiveLayout = "grid-template-columns: repeat(3, 33.3%);";
 	async created(): Promise<void> {
 		await this.$router.isReady();
 		this.$watch(
@@ -51,8 +50,6 @@ export default class CardViewer extends Vue {
 				}
 			}
 		);
-		this.ResponsiveLayout()
-		window.onresize = () => this.ResponsiveLayout();
 	}
 
 	isNullOrEmpty(str: string): boolean {
@@ -62,21 +59,6 @@ export default class CardViewer extends Vue {
 	cardDataSearch(elem: cardInfo, toSearch: string): boolean {
 		return (elem.title.indexOf(toSearch) !== -1 || elem.content.indexOf(toSearch) !== -1 || `${elem.date.getFullYear()}.${elem.date.getMonth() + 1}.${elem.date.getDate()}`.indexOf(toSearch) !== -1)
 	}
-
-	ResponsiveLayout(): void{
-		let width = window.innerWidth;
-		let height = window.innerHeight;
-		if(1.6 * width < height){
-			this.gridResponsiveLayout = "grid-template-columns: 100%"
-		}
-		else if(width < 1.1 * height){
-			this.gridResponsiveLayout = "grid-template-columns: repeat(2, 50%);"
-		}
-		else{
-			this.gridResponsiveLayout = "grid-template-columns: repeat(3, 33.3%);"
-		}
-	}
-
 
 	navagate(href: string): void {
 		setTimeout(() =>
@@ -101,6 +83,19 @@ export default class CardViewer extends Vue {
 	max-width:60rem;
 	padding: 0 1rem;
 	border-style:none;
+	grid-template-columns: repeat(3, 33.3%);
+}
+
+@media screen and (max-width: 960px) {
+	.container{
+		grid-template-columns: repeat(2, 50%);
+	}
+}
+	
+@media screen and (max-width: 600px) {
+	.container{
+		grid-template-columns: 100%;
+	}
 }
 .card{
 	margin: 0.5rem;
